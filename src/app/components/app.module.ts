@@ -7,13 +7,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './header/header.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ExchangeComponent } from './exchange/exchange.component';
+import { WalletComponent } from './wallet/wallet.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     DashboardComponent,
-    ExchangeComponent
+    ExchangeComponent,
+    WalletComponent
   ],
   imports: [
     BrowserModule,
@@ -24,3 +26,4 @@ import { ExchangeComponent } from './exchange/exchange.component';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+ 
