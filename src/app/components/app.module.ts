@@ -9,6 +9,8 @@ import { HeaderComponent } from './header/header.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ExchangeComponent } from './exchange/exchange.component';
 import { WalletComponent } from './dashboard/wallet/wallet.component';
+import { SharedModule } from './shared/shared.module';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,10 +23,12 @@ import { WalletComponent } from './dashboard/wallet/wallet.component';
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
+  
 export class AppModule { }
  
