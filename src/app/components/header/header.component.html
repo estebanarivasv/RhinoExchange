@@ -1,1 +1,25 @@
-<p>header works!</p>
+<!-- sm, md, lg screen -->
+<mat-toolbar *ngIf="!(deviceXs)" color="primary">
+    <mat-icon svgIcon="rhino_full" class="logo"></mat-icon>
+    <div class="title">
+        <span>Rhino Exchange</span>
+    </div>
+    <button mat-button routerLink="dashboard">Dashboard</button>
+    <button mat-button routerLink="exchange">Exchange</button>
+    <span class="spacer"></span>
+</mat-toolbar>
+
+<!-- xs screen -->
+<mat-toolbar *ngIf="deviceXs" color="primary">
+    <mat-toolbar-row fxLayoutAlign="center center">
+        <mat-icon svgIcon="rhino_full" class="logo"></mat-icon>
+        <div class="title">
+            <span>Rhino Exchange</span>
+        </div>
+    </mat-toolbar-row>
+    <mat-toolbar-row fxLayoutAlign="center center">
+        <button mat-button routerLink="dashboard">Dashboard</button>
+        <button mat-button routerLink="exchange">Exchange</button>
+    </mat-toolbar-row>
+</mat-toolbar>
+
