@@ -10,6 +10,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ExchangeComponent } from './exchange/exchange.component';
 import { WalletComponent } from './dashboard/wallet/wallet.component';
 import { SharedModule } from './shared/shared.module';
+import { SectionComponent } from './section/section.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { SharedModule } from './shared/shared.module';
     HeaderComponent,
     DashboardComponent,
     ExchangeComponent,
-    WalletComponent
+    WalletComponent,
+    SectionComponent
   ],
   imports: [
     BrowserModule,
