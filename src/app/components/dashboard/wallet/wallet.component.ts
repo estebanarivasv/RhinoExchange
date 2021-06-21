@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { WalletModel } from 'src/app/models/wallet.model';
+import { EditWalletComponent } from './edit-wallet/edit-wallet.component';
 
 @Component({
   selector: 'app-wallet',
@@ -7,9 +10,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WalletComponent implements OnInit {
 
-  constructor() { }
+  @Input() wallets: Array<WalletModel> | null = [];
+
+  constructor(private dialog:MatDialog) { }
 
   ngOnInit(): void {
+    if (this.wallets === null) {
+      alert("Wallets empty")
+    }
+  }
+
+  openEditDialog(wallet: WalletModel): void {
+    this.dialog.open(EditWalletComponent, {
+      data: wallet
+    });
+  }
+
+  openAddDialog(): void {
+    this.dialog.open(EditWalletComponent);
   }
 
 }

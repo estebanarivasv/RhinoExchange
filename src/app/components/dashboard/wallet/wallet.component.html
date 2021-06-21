@@ -1,1 +1,45 @@
-<p>wallet works!</p>
+<div fxLayout="column">
+    <mat-accordion class="example-headers-align">
+        <mat-expansion-panel *ngFor="let wallet of this.wallets" hideToggle>
+            <mat-expansion-panel-header>
+                <mat-panel-title class="accordion-title">
+                    {{ wallet.name }}
+                </mat-panel-title>
+                <mat-panel-description>
+                    <span>Address: {{wallet.address.toString()}}</span>
+                    <span class="balance">{{wallet.balance.toString()}} BTC</span>
+                    <mat-icon>arrow_drop_down</mat-icon>
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            <ng-container *ngIf="wallet.transactions.length === 0" >
+                <span class="no-transactions">No transactions data</span>
+            </ng-container>
+            <table mat-table class="mat-elevation-z8" *ngFor="let transaction of wallet.transactions">
+                <ng-container matColumnDef="position">
+                    <th mat-header-cell *matHeaderCellDef> Timestamp </th>
+                    <td mat-cell> {{transaction.timestamp}} </td>
+                </ng-container>
+                <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef> Type </th>
+                    <td mat-cell> {{transaction.type}} </td>
+                </ng-container>
+                <ng-container matColumnDef="weight">
+                    <th mat-header-cell *matHeaderCellDef> Amount </th>
+                    <td mat-cell> {{transaction.amount}} </td>
+                </ng-container>
+                <ng-container>
+                    <th mat-header-cell *matHeaderCellDef> Sender </th>
+                    <td mat-cell> {{transaction.senderAddress}} </td>
+                </ng-container>
+                <ng-container>
+                    <th mat-header-cell *matHeaderCellDef> Reciever </th>
+                    <td mat-cell> {{transaction.recieverAddress}} </td>
+                </ng-container>
+            </table>
+            <mat-action-row>
+                <button mat-button (click)="openDialog(wallet)">Edit</button>
+                <button mat-button color="warn">Delete</button>
+            </mat-action-row>
+        </mat-expansion-panel>
+    </mat-accordion>
+</div>
