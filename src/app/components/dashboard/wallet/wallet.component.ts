@@ -26,8 +26,4 @@ export class WalletComponent implements OnInit {
     });
   }
 
-  openAddDialog(): void {
-    this.dialog.open(EditWalletComponent);
-  }
-
 }
