@@ -1,9 +1,9 @@
 import { TransactionModel } from "./transaction.model";
 
 interface IWallet {
-    id: number;
+    id?: number;
     name: string;
-    transactions: Array<TransactionModel>;
+    transactions?: Array<TransactionModel>;
     address: string;
     balance: number;        // In BTC
 }
@@ -11,10 +11,11 @@ interface IWallet {
 export class WalletModel implements IWallet {
 
     constructor(
-        public id: number,
         public name: string,
-        public transactions: Array<TransactionModel>,
         public address: string,
-        public balance: number) { }
+        public balance: number,
+        public transactions: Array<TransactionModel>,
+        public id?: number
+    ) { }
 
 }
