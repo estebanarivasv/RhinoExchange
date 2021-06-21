@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MediaChange, MediaObserver } from '@angular/flex-layout';
 import { Subscription } from 'rxjs';
+import { WalletModel } from 'src/app/models/wallet.model';
 import { WalletService } from 'src/app/services/wallet.service';
 
 @Component({
@@ -16,6 +17,8 @@ export class DashboardComponent implements OnInit {
 
   title = "Dashboard";
 
+  wallets: Array<WalletModel> | null = [];
+
 
   constructor(public mediaObserver: MediaObserver, private walletService: WalletService) { }
 
@@ -24,24 +27,12 @@ export class DashboardComponent implements OnInit {
     this.mediaSubcriptor = this.mediaObserver.media$.subscribe((result: MediaChange) => {
       this.deviceXs = result.mqAlias === "xs" ? true : false;
     })
+    this.wallets = this.walletService.getAllWallets();
+    console.log("These are your wallets", this.wallets);
   }
 
   ngOnDestroy() {
     this.mediaSubcriptor.unsubscribe();
-  }
-
-  step = 0;
-
-  setStep(index: number) {
-    this.step = index;
-  }
-
-  nextStep() {
-    this.step++;
-  }
-
-  prevStep() {
-    this.step--;
   }
 
   addWallet() {
@@ -49,7 +40,4 @@ export class DashboardComponent implements OnInit {
     this.walletService.createWallet()
   }
 
-  showWallets() {
-    this.walletService.getAllWallets()
-  }
 }
