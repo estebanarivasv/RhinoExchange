@@ -8,9 +8,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './header/header.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ExchangeComponent } from './exchange/exchange.component';
-import { WalletComponent } from './dashboard/wallet/wallet.component';
 import { SharedModule } from './shared/shared.module';
 import { SectionComponent } from './section/section.component';
+import { CommonModule } from '@angular/common';
+import { WalletComponent } from './dashboard/wallet/wallet.component';
+import { EditWalletComponent } from './dashboard/wallet/edit-wallet/edit-wallet.component';
+import { AddWalletComponent } from './dashboard/wallet/add-wallet/add-wallet.component';
 
 @NgModule({
   declarations: [
@@ -18,11 +21,14 @@ import { SectionComponent } from './section/section.component';
     HeaderComponent,
     DashboardComponent,
     ExchangeComponent,
+    SectionComponent,
     WalletComponent,
-    SectionComponent
+    EditWalletComponent,
+    AddWalletComponent
   ],
   imports: [
     BrowserModule,
+    CommonModule,
     HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
