@@ -14,6 +14,7 @@ import { CommonModule } from '@angular/common';
 import { WalletComponent } from './dashboard/wallet/wallet.component';
 import { EditWalletComponent } from './dashboard/wallet/edit-wallet/edit-wallet.component';
 import { AddWalletComponent } from './dashboard/wallet/add-wallet/add-wallet.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { AddWalletComponent } from './dashboard/wallet/add-wallet/add-wallet.com
     HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    SharedModule
+    SharedModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
