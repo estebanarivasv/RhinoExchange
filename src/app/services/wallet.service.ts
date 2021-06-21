@@ -15,9 +15,9 @@ export class WalletService {
   createWallet() {
     let wallet1 = new WalletModel(1, "Fixed savings", [], "0x54a5sd45as4d", 560042.2);
     let wallet2 = new WalletModel(2, "Normal savings", [], "0x54a5as66as4d", 486.2);
-    let wallets = [wallet1, wallet2]
+    let wallets = [wallet1, wallet2];
 
-    window.localStorage.setItem('wallets', JSON.stringify(wallets))
+    window.localStorage.setItem("wallets", JSON.stringify(wallets));
   }
 
   deleteWallet() { }
@@ -28,14 +28,16 @@ export class WalletService {
 
   deleteTransaction(index: number) { }
 
-  getAllWallets() {
+  getAllWallets(): WalletModel[] | null {
+
     let walletsFromLocal = window.localStorage.getItem("wallets")
 
     if (walletsFromLocal !== null) {
       this.wallets = JSON.parse(walletsFromLocal)
-      console.log("wallets in localStorage", this.wallets)
+      return this.wallets;
+    } else {
+      alert("There are not available wallets")
+      return null
     }
-
   }
-
 }
