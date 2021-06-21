@@ -1,1 +1,38 @@
-<p>add-wallet works!</p>
+<form class="form" (ngSubmit)="onSubmit()" #addWalletForm="ngForm">
+    <h2 mat-dialog-title>New wallet</h2>
+    <mat-dialog-content class="mat-typography">
+
+
+        <mat-form-field class="full-width">
+            <mat-label>Name</mat-label>
+            <input matInput placeholder="Ex. Fixed savings" [(ngModel)]="addWalletModel.name" name="name" required
+                #name="ngModel">
+            <mat-error *ngIf="(name.invalid && (name.dirty || name.touched)) && name.errors?.required">
+                The name is <strong>required</strong>
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+            <mat-label>Address</mat-label>
+            <input matInput placeholder="Ex. 1FfmbHfnpaZjKFvyi1okTjJJusN455paPH" [(ngModel)]="addWalletModel.address"
+                name="address" required #address="ngModel">
+            <mat-error *ngIf="(address.invalid && (address.dirty || address.touched)) && address.errors?.required">
+                The address is <strong>required</strong>
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+            <mat-label>Balance (in BTC)</mat-label>
+            <input matInput placeholder="Ex. 1 BTC" [(ngModel)]="addWalletModel.balance" name="balance" required
+                #balance="ngModel">
+            <mat-error *ngIf="(balance.invalid && (balance.dirty || balance.touched)) && balance.errors?.required">
+                Balance is <strong>required</strong>
+            </mat-error>
+        </mat-form-field>
+    </mat-dialog-content>
+
+    <mat-dialog-actions align="center">
+        <button mat-button color="primary" [disabled]="!addWalletForm.form.valid" type="submit" mat-dialog-close>Save</button>
+        <button mat-button mat-dialog-close>Close</button>
+    </mat-dialog-actions>
+</form>
