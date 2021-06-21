@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { MediaChange, MediaObserver } from '@angular/flex-layout';
+import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { WalletModel } from 'src/app/models/wallet.model';
 import { WalletService } from 'src/app/services/wallet.service';
+import { AddWalletComponent } from './wallet/add-wallet/add-wallet.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -20,7 +22,10 @@ export class DashboardComponent implements OnInit {
   wallets: Array<WalletModel> | null = [];
 
 
-  constructor(public mediaObserver: MediaObserver, private walletService: WalletService) { }
+  constructor(
+    public mediaObserver: MediaObserver,
+    private walletService: WalletService,
+    private dialog: MatDialog) { }
 
   ngOnInit() {
     // Tracks if screen size changes
@@ -35,9 +40,8 @@ export class DashboardComponent implements OnInit {
     this.mediaSubcriptor.unsubscribe();
   }
 
-  addWallet() {
-    console.log("llama")
-    this.walletService.createWallet()
+  openAddDialog(): void {
+    this.dialog.open(AddWalletComponent);
   }
 
 }
