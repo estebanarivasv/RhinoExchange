@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { MediaChange, MediaObserver } from '@angular/flex-layout';
 import { MatDialog } from '@angular/material/dialog';
-import { Subscription } from 'rxjs';
+import { interval, Subscription } from 'rxjs';
 import { WalletModel } from 'src/app/models/wallet.model';
 import { WalletService } from 'src/app/services/wallet.service';
 import { AddWalletComponent } from './wallet/add-wallet/add-wallet.component';
+
+const source = interval(1000);
 
 @Component({
   selector: 'app-dashboard',
@@ -20,7 +22,7 @@ export class DashboardComponent implements OnInit {
   title = "Dashboard";
 
   wallets: Array<WalletModel> | null = [];
-
+  
 
   constructor(
     public mediaObserver: MediaObserver,
@@ -28,12 +30,19 @@ export class DashboardComponent implements OnInit {
     private dialog: MatDialog) { }
 
   ngOnInit() {
+
+    source.subscribe(val => {
+      let wallets = this.walletService.getAllWallets();
+      if ((wallets !== null) && (this.wallets?.length !== wallets.length)) {
+        this.wallets = wallets
+      }
+    });
+    
     // Tracks if screen size changes
     this.mediaSubcriptor = this.mediaObserver.media$.subscribe((result: MediaChange) => {
       this.deviceXs = result.mqAlias === "xs" ? true : false;
     })
     this.wallets = this.walletService.getAllWallets();
-    console.log("These are your wallets", this.wallets);
   }
 
   ngOnDestroy() {
@@ -44,4 +53,8 @@ export class DashboardComponent implements OnInit {
     this.dialog.open(AddWalletComponent);
   }
 
+
+  ngOnChanges() {
+    this.wallets = this.walletService.getAllWallets();
+  }
 }

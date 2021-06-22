@@ -7,22 +7,37 @@ import { WalletModel } from '../models/wallet.model';
 })
 export class WalletService {
 
-  getWalletData() { }
-
   // TODO: Validate if wallet name exists.
   createWallet(newWallet: WalletModel) {
+
     let wallets = this.getAllWallets();
-    if (wallets !== null) {
+    if ((wallets !== null) && (wallets !== [])) {
       newWallet.id = wallets.length;
 
-      console.log("Antes", this.getAllWallets());
       wallets.push(newWallet);
       this.saveWalletsList(wallets);
-      console.log("Despues", this.getAllWallets());
+      
+    } else {
+      let wallets = []
+      newWallet.id = 1
+      wallets.push(newWallet);
+      this.saveWalletsList(wallets);
     }
   }
 
-  deleteWallet() { }
+  deleteWallet(wallet: WalletModel) {
+    let wallets = this.getAllWallets();
+    if (wallets !== null) {
+      if (wallet.id !== undefined) {
+        let index = this.getWalletIndex(wallet.id)
+
+        wallets.splice(index, 1)
+
+        this.saveWalletsList(wallets)
+      }
+
+    }
+  }
 
   getWalletIndex(walletId: number): number {
     let wallets = this.getAllWallets()
@@ -55,7 +70,6 @@ export class WalletService {
 
     window.localStorage.setItem("wallets", JSON.stringify(walletList));
 
-    console.log("wallets guardadas", JSON.stringify(walletList));
   }
 
   addTransaction(transaction: TransactionModel) { }
@@ -69,8 +83,13 @@ export class WalletService {
     let walletsFromLocal = window.localStorage.getItem("wallets")
 
     if (walletsFromLocal !== null) {
-      let wallets = JSON.parse(walletsFromLocal)
-      return wallets;
+      try {
+        let wallets = JSON.parse(walletsFromLocal);
+        return wallets;
+      } catch (Exception) {
+        return [];
+      }
+
     } else {
       alert("There are not available wallets")
       return null
