@@ -7,7 +7,20 @@ import { WalletModel } from '../models/wallet.model';
 })
 export class WalletService {
 
-  // TODO: Validate if wallet name exists.
+  getTotalBalance() {
+    let wallets = this.getAllWallets();
+    if ((wallets !== null) && (wallets !== [])) {
+      let total = 0
+      wallets.forEach(wallet => {
+        total = total + wallet.balance
+      })
+      return total
+
+    } else {
+      return 0;
+    }
+  }
+
   createWallet(newWallet: WalletModel) {
 
     let wallets = this.getAllWallets();
@@ -50,6 +63,17 @@ export class WalletService {
     return -1
   }
 
+  getWalletByName(walletName: string): WalletModel | null {
+    let wallets = this.getAllWallets()
+    if (wallets !== null) {
+      var index: number = wallets.findIndex(function (wallet) {
+        return wallet.name === walletName;
+      });
+      return wallets[index]
+    }
+    return null
+  }
+
   editWallet(editedWallet: WalletModel) {
     let wallets = this.getAllWallets()
 
@@ -63,22 +87,10 @@ export class WalletService {
   }
 
   saveWalletsList(walletList: Array<WalletModel>) {
-    // TODO DELETE THIS
-    //let wallet1 = new WalletModel("Fixed savings", "0x54a5sd45as4d", 560042.2, [], 1);
-    //let wallet2 = new WalletModel("Normal savings", "0x54a5as66as4d", 486.2, [], 2);
-    //let wallets = [wallet1, wallet2];
-
     window.localStorage.setItem("wallets", JSON.stringify(walletList));
-
   }
 
-  addTransaction(transaction: TransactionModel) { }
-
-  modifyTransaction(index: number) { }
-
-  deleteTransaction(index: number) { }
-
-  getAllWallets(): WalletModel[] | null {
+  getAllWallets(): WalletModel[] {
 
     let walletsFromLocal = window.localStorage.getItem("wallets")
 
@@ -86,13 +98,13 @@ export class WalletService {
       try {
         let wallets = JSON.parse(walletsFromLocal);
         return wallets;
-      } catch (Exception) {
+      }
+      catch (Exception) {
         return [];
       }
 
     } else {
-      alert("There are not available wallets")
-      return null
+      return [];
     }
   }
 }

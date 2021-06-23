@@ -1,8 +1,11 @@
 <app-section [sectionTitle]="title"></app-section>
 
-<mat-card class="card">
-    <mat-tab-group>
-        <mat-tab label="Buy"> Content 1 </mat-tab>
-        <mat-tab label="Sell"> Content 2 </mat-tab>
-    </mat-tab-group>
-</mat-card>
+<div fxLayout="column" fxLayoutAlign="space-around center">
+    <mat-card class="card">
+        <mat-tab-group>
+            <mat-tab label="Buy">
+                <app-buy-crypto></app-buy-crypto>
+            </mat-tab>
+        </mat-tab-group>
+    </mat-card>
+</div>

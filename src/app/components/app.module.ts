@@ -15,6 +15,7 @@ import { WalletComponent } from './dashboard/wallet/wallet.component';
 import { EditWalletComponent } from './dashboard/wallet/edit-wallet/edit-wallet.component';
 import { AddWalletComponent } from './dashboard/wallet/add-wallet/add-wallet.component';
 import { FormsModule } from '@angular/forms';
+import { BuyCryptoComponent } from './exchange/buy-crypto/buy-crypto.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { FormsModule } from '@angular/forms';
     SectionComponent,
     WalletComponent,
     EditWalletComponent,
-    AddWalletComponent
+    AddWalletComponent,
+    BuyCryptoComponent
   ],
   imports: [
     BrowserModule,

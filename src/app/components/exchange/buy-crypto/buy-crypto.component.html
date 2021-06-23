@@ -1,0 +1,112 @@
+<form (ngSubmit)="onSubmit()" #buyCryptoForm="ngForm">
+    <mat-grid-list cols="2" rowHeight="20px" class="mt">
+        <mat-grid-tile colspan="2" rowspan="4">
+            <table cellspacing="0">
+                <tr>
+                    <td>
+                        <h3>From</h3>
+                    </td>
+                    <td>
+                        <!-- WALLET -->
+                        <mat-form-field appearance="fill">
+                            <mat-label>Wallet name</mat-label>
+                            <mat-select [(ngModel)]="selectedWalletName" (selectionChange)="setWallet()" required
+                                #selectedWallet="ngModel" name="selectedWallet">
+                                <mat-option *ngFor="let wallet of this.wallets" [value]="wallet.name">
+                                    {{wallet.name}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error
+                                *ngIf="(selectedWallet.invalid && (selectedWallet.dirty || selectedWallet.touched)) && selectedWallet.errors?.required">
+                                Required
+                            </mat-error>
+                        </mat-form-field>
+                    </td>
+                </tr>
+            </table>
+        </mat-grid-tile>
+        <!-- WALLET'S BALANCE -->
+        <mat-grid-tile colspan="2" rowspan="2">
+            <h4 *ngIf="this.balance != 0">Balance: {{this.balance}} BTC</h4>
+        </mat-grid-tile>
+
+    </mat-grid-list>
+    <mat-grid-list cols="2" rowHeight="45px">
+        <mat-grid-tile colspan="2" rowspan="2">
+            <table class="example-full-width" cellspacing="0" class="mt">
+                <tr>
+                    <td>
+                        <!-- AMOUNT TO SPEND -->
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Spend</mat-label>
+                            <input matInput [(ngModel)]="amountSpent" (input)="multiplyForConversion()"
+                                #amountS="ngModel" name="amountS" required>
+                            <mat-error
+                                *ngIf="(amountS.invalid && (amountS.dirty || amountS.touched)) && amountS.errors?.required">
+                                Required
+                            </mat-error>
+                        </mat-form-field>
+                    </td>
+                    <td>
+                        <!-- FROM COIN -->
+                        <mat-form-field appearance="fill" layoutAlign="center center">
+                            <mat-label>Coin</mat-label>
+                            <mat-select [(ngModel)]="fromCoinSymbol" name="fromCoin" (selectionChange)="setFromCoin()"
+                                #fromCoin="ngModel" required>
+                                <mat-option *ngFor="let coin of this.availableCoinIds" [value]="coin">
+                                    {{coin}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error
+                                *ngIf="(fromCoin.invalid && (fromCoin.dirty || fromCoin.touched)) && fromCoin.errors?.required">
+                                Required
+                            </mat-error>
+                        </mat-form-field>
+                    </td>
+                </tr>
+            </table>
+        </mat-grid-tile>
+    </mat-grid-list>
+
+    <mat-grid-list cols="2" rowHeight="30px">
+        <mat-grid-tile colspan="2" rowspan="2">
+            <table class="example-full-width" cellspacing="0" class="mt">
+                <tr>
+                    <td>
+                        <!-- AMOUNT RECIEVE -->
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Recieve</mat-label>
+                            <input matInput disabled [(ngModel)]="amountReceived" name="amountR">
+                        </mat-form-field>
+                    </td>
+                    <td>
+                        <!-- TO COIN -->
+                        <mat-form-field appearance="fill" layoutAlign="center center">
+                            <mat-label>Coin</mat-label>
+                            <mat-select [(ngModel)]="toCoinSymbol" name="toCoin" (selectionChange)="setMultiplyValue()"
+                                #toCoin="ngModel" required>
+                                <mat-option *ngFor="let coin of this.availableCoinIds" [value]="coin">
+                                    {{coin}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error
+                                *ngIf="(toCoin.invalid && (toCoin.dirty || toCoin.touched)) && toCoin.errors?.required">
+                                Required
+                            </mat-error>
+                        </mat-form-field>
+                    </td>
+                </tr>
+            </table>
+        </mat-grid-tile>
+
+        <!-- CONVERTIBILITY -->
+        <mat-grid-tile colspan="2" rowspan="2">
+            <h3 *ngIf="conversionValue !== 0">
+                Price: 1 {{fromCoinSymbol}} ≈ {{conversionValue}} {{toCoinSymbol}}
+            </h3>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="2" rowspan="2">
+            <button mat-raised-button color="primary" [disabled]="!buyCryptoForm.form.valid">BUY</button>
+        </mat-grid-tile>
+    </mat-grid-list>
+</form>

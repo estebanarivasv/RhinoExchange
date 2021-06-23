@@ -3,7 +3,7 @@ import { TransactionModel } from "./transaction.model";
 interface IWallet {
     id?: number;
     name: string;
-    transactions?: Array<TransactionModel>;
+    transactions: Array<TransactionModel>;
     address: string;
     balance: number;        // In BTC
 }

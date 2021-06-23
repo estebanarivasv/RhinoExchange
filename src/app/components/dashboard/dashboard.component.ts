@@ -22,6 +22,7 @@ export class DashboardComponent implements OnInit {
   title = "Dashboard";
 
   wallets: Array<WalletModel> | null = [];
+  totalBalance: number = 0;
   
 
   constructor(
@@ -30,11 +31,13 @@ export class DashboardComponent implements OnInit {
     private dialog: MatDialog) { }
 
   ngOnInit() {
-
+    this.totalBalance = this.walletService.getTotalBalance();
+    
     source.subscribe(val => {
       let wallets = this.walletService.getAllWallets();
       if ((wallets !== null) && (this.wallets?.length !== wallets.length)) {
-        this.wallets = wallets
+        this.wallets = wallets;
+        this.totalBalance = this.walletService.getTotalBalance();
       }
     });
     

@@ -1,32 +1,24 @@
 import { CoinModel } from "./coin.model";
 
-enum TransactionType {
-    sell,
-    buy
-}
 
 interface ITransaction {
-    from: CoinModel;
-    to: CoinModel;
-    amount: number;
-    senderAddress: string;
-    recieverAddress: string;
+    fromCoin: CoinModel;
+    toCoin: CoinModel;
+    amountSpent: number;
+    amountReceived: number;
     timestamp: string;
-    type: TransactionType
-    supportedCurrencies: []
+    type: string
 }
 
 export class TransactionModel implements ITransaction {
 
     constructor(
-        public from: CoinModel,
-        public to: CoinModel,
-        public amount: number,
-        public senderAddress: string,
-        public recieverAddress: string,
+        public fromCoin: CoinModel,
+        public toCoin: CoinModel,
+        public amountSpent: number,
+        public amountReceived: number,
         public timestamp: string,
-        public type: TransactionType,
-        public supportedCurrencies: []
+        public type: string
     ) { }
 
 
