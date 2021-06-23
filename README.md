@@ -4,7 +4,7 @@
 
 # Rhino Exchange
 
-Live demo: https://rhino-exchange-7d650.web.app/dashboard
+Live demo: https://rhino-exchange-7d650.web.app
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.0.4.
 
