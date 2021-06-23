@@ -1,25 +1,21 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { TransactionModel } from '../models/transaction.model';
+import { WalletModel } from '../models/wallet.model';
+import { WalletService } from './wallet.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TransactionService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private walletService: WalletService) { }
 
-  createTransaction() { }
-  
-  deleteTransaction(timestamp: string) { }
-  
-  modifyTransaction(timestamp: string) { }
-
-  getAvailableCurrencies() {
-    const URL = "https://api.coingecko.com/api/v3/simple/supported_vs_currencies"
-
-    this.http.get(URL).subscribe(data => {
-      console.log(data)
-    })
-
+  addTransactionToWallet(walletName: string, transaction: TransactionModel) {
+    let wallet = this.walletService.getWalletByName(walletName);
+    if (wallet !== null) {
+      wallet.transactions.push(transaction);
+      this.walletService.editWallet(wallet);
+    }
   }
 }

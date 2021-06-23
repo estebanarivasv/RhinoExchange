@@ -1,5 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { CoinModel } from '../models/coin.model';
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -8,27 +12,14 @@ export class CoinService {
 
   constructor(private http: HttpClient) { }
 
-  // For exchange
-  getAvailableCoinsList() {
-    const URL = "https://api.coingecko.com/api/v3/coins/list?include_platform=false"
-    this.http.get(URL).subscribe(data => {
-      console.log(data)
-      return true
-    })
+  getAvailableCoinIds(): Observable<Array<string>> {
+    const URL = "https://api.coingecko.com/api/v3/simple/supported_vs_currencies"
+    return this.http.get<Array<string>>(URL);
   }
-  
-  getCoinVsCurrencyComparison(coinId: string, currencyId: string) {
-    const URL = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=" + currencyId + "&ids=" + coinId + "&order=market_cap_desc&per_page=100&page=1&sparkline=false"
-    this.http.get(URL).subscribe(data => {
-      console.log(data)
-    })
-  }
-  
 
-  getCoinData(coinSymbol: string) {
-    const URL = "https://api.coingecko.com/api/v3/coins/" + coinSymbol + "?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false&sparkline=false"
-    this.http.get(URL).subscribe(data => {
-      console.log(data)
-    })
+  getMarketByTargetCoin(coinSymbol: string): Observable<Array<CoinModel>> {
+    const URL = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=" + coinSymbol + "&order=market_cap_desc&per_page=100&page=1&sparkline=false"
+    return this.http.get<Array<CoinModel>>(URL);
   }
+  
 }
