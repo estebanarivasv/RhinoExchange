@@ -1,0 +1,26 @@
+<form class="form" (ngSubmit)="onSubmit()" #editWalletForm="ngForm">
+  <h2 mat-dialog-title>Edit wallet</h2>
+  <mat-dialog-content class="mat-typography">
+
+
+    <mat-form-field class="full-width">
+      <mat-label>Name</mat-label>
+      <input matInput placeholder="Ex. Fixed savings" [(ngModel)]="editWalletModel.name" name="name">
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <mat-label>Address</mat-label>
+      <input matInput placeholder="Ex. 1FfmbHfnpaZjKFvyi1okTjJJusN455paPH" [(ngModel)]="editWalletModel.address" name="address">
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <mat-label>Balance</mat-label>
+      <input matInput placeholder="Ex. 0.698854 BTC" value="{{editWalletModel.balance}}" disabled>
+    </mat-form-field>
+
+    TODO: remove this: {{editWalletModel | json}}
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="center">
+    <button mat-button color="primary" [disabled]="!editWalletForm.form.valid" type="submit" mat-dialog-close>Save</button>
+    <button mat-button mat-dialog-close>Close</button>
+  </mat-dialog-actions>
+</form>

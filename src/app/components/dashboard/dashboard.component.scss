@@ -1,0 +1,53 @@
+.grid {
+    border: 1px;
+}
+.scroll-box {
+border: 1px;
+padding: 5px;
+height: 300px;
+overflow: scroll;
+}
+
+::-webkit-scrollbar {
+width: 8px;
+height: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+background: rgb(204, 204, 204);  
+}
+
+::-webkit-scrollbar-thumb:hover {
+background: rgb(158, 158, 158);  
+}
+
+.left-card {
+  width: 80%;
+  height: 80%;
+}
+
+.right-card {
+  width: 90%;
+  height: 80%;
+}
+
+.panel-title {
+  font-weight: bold;
+  font-size: medium;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.title{
+  align-items: center;
+}
+
+.mx {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.my {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}

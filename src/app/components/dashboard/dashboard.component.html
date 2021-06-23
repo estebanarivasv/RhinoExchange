@@ -1,0 +1,36 @@
+<app-section [sectionTitle]="title"></app-section>
+
+<mat-grid-list cols="4" rowHeight="55px">
+    <mat-grid-tile colspan="1" rowspan="9">
+        <mat-card class="left-card">
+            <div fxLayout="column">
+                <h2>Balance</h2>
+                <div fxLayout="column">
+                    <div>1. One</div>
+                    <div>2. Two</div>
+                    <div>3. Three</div>
+                    <div>4. Four</div>
+                </div>
+            </div>
+        </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="3" rowspan="9">
+        <mat-card class="right-card">
+            <div fxLayout="column">
+                <div fxLayout="row" fxLayoutAlign="space-between center">
+                    <div>
+                        <h2 class="title">My wallets</h2>
+                    </div>
+                    <button class="mx my" mat-raised-button color="primary" (click)="openAddDialog()">Add
+                        wallet</button>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="end center">
+                    
+                </div>
+                <div class="scroll-box">
+                    <app-wallet [wallets]="this.wallets"></app-wallet>
+                </div>
+            </div>
+        </mat-card>
+    </mat-grid-tile>
+</mat-grid-list>
