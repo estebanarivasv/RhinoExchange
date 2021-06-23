@@ -4,6 +4,8 @@
 
 # Rhino Exchange
 
+Live demo: https://rhino-exchange-7d650.web.app/dashboard
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.0.4.
 
 It is about a basic webapp that works with [Coingecko-API](https://www.coingecko.com/en/api). The user can access to its wallets information and also make transactions such as buying other cryptocurrencies.
